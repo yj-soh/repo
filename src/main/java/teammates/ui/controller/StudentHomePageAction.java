@@ -126,7 +126,8 @@ public class StudentHomePageAction extends Action {
         try {
             submitted = logic.hasStudentSubmittedEvaluation(eval.courseId, eval.name, studentEmail);
         } catch (InvalidParametersException e) {
-            Assumption.fail("Parameters are expected to be valid at this point :" + TeammatesException.toStringWithStackTrace(e));
+            Assumption.fail("Parameters are expected to be valid at this point :" 
+                            + TeammatesException.toStringWithStackTrace(e));
         }
         
         return submitted ? 
@@ -145,29 +146,30 @@ public class StudentHomePageAction extends Action {
             return logic.hasStudentSubmittedFeedback(
                     fs.courseId, fs.feedbackSessionName, studentEmail);
         } catch (InvalidParametersException | EntityDoesNotExistException e) {
-            Assumption.fail("Parameters are expected to be valid at this point :" + TeammatesException.toStringWithStackTrace(e));
+            Assumption.fail("Parameters are expected to be valid at this point :" 
+                            + TeammatesException.toStringWithStackTrace(e));
             return false;
         }
     }
     
     private boolean checkEventualConsistency(String recentlyJoinedCourseId) {
-        boolean isDataConsistent = false;
-        
         if(recentlyJoinedCourseId == null) {
-            isDataConsistent = true;
+            return true;
         } else {
             for(CourseDetailsBundle currentCourse : data.courses) {
                 if(currentCourse.course.id.equals(recentlyJoinedCourseId)) {
-                    isDataConsistent = true;
+                    return true;
                 }
             }
         }
         
-        return isDataConsistent;
+        return false;
     }
 
     private void showEventualConsistencyMessage(String recentlyJoinedCourseId) {
-        String errorMessage = String.format(Const.StatusMessages.EVENTUAL_CONSISTENCY_MESSAGE_STUDENT, recentlyJoinedCourseId);
+        String errorMessage = String.format(
+                                Const.StatusMessages.EVENTUAL_CONSISTENCY_MESSAGE_STUDENT, 
+                                recentlyJoinedCourseId);
         statusToUser.add(errorMessage);
     }
     
@@ -190,13 +192,16 @@ public class StudentHomePageAction extends Action {
             EvaluationAttributes eval = edb.evaluation;
             switch (eval.getStatus()) {
                 case PUBLISHED:
-                    data.evalSubmissionStatusMap.put(eval.courseId+"%"+eval.name, Const.STUDENT_EVALUATION_STATUS_PUBLISHED);
+                    data.evalSubmissionStatusMap.put(eval.courseId + "%" + eval.name, 
+                                                    Const.STUDENT_EVALUATION_STATUS_PUBLISHED);
                     break;
                 case CLOSED:
-                    data.evalSubmissionStatusMap.put(eval.courseId+"%"+eval.name, Const.STUDENT_EVALUATION_STATUS_CLOSED);
+                    data.evalSubmissionStatusMap.put(eval.courseId + "%" + eval.name, 
+                                                    Const.STUDENT_EVALUATION_STATUS_CLOSED);
                     break;
                 default:
-                    data.evalSubmissionStatusMap.put(eval.courseId+"%"+eval.name, Const.STUDENT_EVALUATION_STATUS_PENDING);
+                    data.evalSubmissionStatusMap.put(eval.courseId + "%" + eval.name,
+                                                    Const.STUDENT_EVALUATION_STATUS_PENDING);
                     break;
             }
         }
@@ -205,7 +210,7 @@ public class StudentHomePageAction extends Action {
     private void addPlaceholderFeedbackSessions(CourseDetailsBundle course) {
         for(FeedbackSessionDetailsBundle fsb: course.feedbackSessions){
             FeedbackSessionAttributes f = fsb.feedbackSession;
-            data.sessionSubmissionStatusMap.put(f.courseId+"%"+f.feedbackSessionName, true);
+            data.sessionSubmissionStatusMap.put(f.courseId + "%" + f.feedbackSessionName, true);
         }
     }
 }
