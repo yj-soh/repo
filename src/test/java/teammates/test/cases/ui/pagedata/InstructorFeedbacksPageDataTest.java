@@ -31,10 +31,10 @@ import teammates.common.util.TimeHelper;
 import teammates.common.util.Utils;
 import teammates.test.cases.BaseTestCase;
 import teammates.ui.controller.InstructorFeedbacksPageData;
-import teammates.ui.template.FeedbackSessionsTableRow;
-import teammates.ui.template.FeedbackSessionsCopyFromModal;
-import teammates.ui.template.FeedbackSessionsTable;
-import teammates.ui.template.FeedbackSessionsForm;
+import teammates.ui.template.instructor.feedbacks.CopyFromModal;
+import teammates.ui.template.instructor.feedbacks.FeedbackSessionsTable;
+import teammates.ui.template.instructor.feedbacks.FeedbackSessionsTableRow;
+import teammates.ui.template.instructor.shared.FeedbackSessionsForm;
 
 public class InstructorFeedbacksPageDataTest extends BaseTestCase {
 
@@ -129,7 +129,7 @@ public class InstructorFeedbacksPageDataTest extends BaseTestCase {
         
         
         ______TS("typical success case: copy modal");
-        FeedbackSessionsCopyFromModal copyModalModel = data.getCopyFromModal();
+        CopyFromModal copyModalModel = data.getCopyFromModal();
         
         assertEquals(1, copyModalModel.getCoursesSelectField().size());
         assertEquals("" , copyModalModel.getFsName());
@@ -296,7 +296,7 @@ public class InstructorFeedbacksPageDataTest extends BaseTestCase {
         
         
         ______TS("typical success case with existing fs passed in: copy modal");
-        FeedbackSessionsCopyFromModal copyModalModel = data.getCopyFromModal();
+        CopyFromModal copyModalModel = data.getCopyFromModal();
         
         assertEquals(1, copyModalModel.getCoursesSelectField().size());
         assertEquals("First feedback session" , copyModalModel.getFsName());
@@ -336,7 +336,7 @@ public class InstructorFeedbacksPageDataTest extends BaseTestCase {
         assertEquals("Session with your own questions", formModel.getFeedbackSessionTypeOptions().get(0).getContent());
         assertEquals("selected", formModel.getFeedbackSessionTypeOptions().get(0).getAttributes().get("selected"));
 
-        FeedbackSessionsCopyFromModal modal = data.getCopyFromModal();
+        CopyFromModal modal = data.getCopyFromModal();
         assertEquals("First feedback session", modal.getFsName());
         
     }

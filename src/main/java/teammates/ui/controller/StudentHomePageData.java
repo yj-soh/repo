@@ -12,9 +12,9 @@ import teammates.common.datatransfer.FeedbackSessionDetailsBundle;
 import teammates.common.util.Const;
 import teammates.common.util.TimeHelper;
 import teammates.common.util.Url;
-import teammates.ui.template.CourseTable;
-import teammates.ui.template.ElementTag;
-import teammates.ui.template.StudentFeedbackSessionActions;
+import teammates.ui.template.shared.CourseTable;
+import teammates.ui.template.shared.ElementTag;
+import teammates.ui.template.student.home.StudentFeedbackSessionActions;
 
 public class StudentHomePageData extends PageData {
     

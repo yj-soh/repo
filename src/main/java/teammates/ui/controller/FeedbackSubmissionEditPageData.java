@@ -13,9 +13,9 @@ import teammates.common.datatransfer.StudentAttributes;
 import teammates.common.util.Const;
 import teammates.common.util.StringHelper;
 import teammates.common.util.Url;
-import teammates.ui.template.FeedbackSubmissionEditQuestion;
-import teammates.ui.template.FeedbackSubmissionEditResponse;
-import teammates.ui.template.StudentFeedbackSubmissionEditQuestionsWithResponses;
+import teammates.ui.template.student.feedbacksubmission.EditQuestion;
+import teammates.ui.template.student.feedbacksubmission.EditResponse;
+import teammates.ui.template.student.feedbacksubmission.EditQuestionsWithResponses;
 
 public class FeedbackSubmissionEditPageData extends PageData {
     public FeedbackSessionQuestionsBundle bundle = null;
@@ -28,7 +28,7 @@ public class FeedbackSubmissionEditPageData extends PageData {
     private StudentAttributes studentToViewPageAs;
     private InstructorAttributes previewInstructor;    
     private String registerMessage; 
-    private List<StudentFeedbackSubmissionEditQuestionsWithResponses> questionsWithResponses;
+    private List<EditQuestionsWithResponses> questionsWithResponses;
     
     public FeedbackSubmissionEditPageData(AccountAttributes account, StudentAttributes student) {
         super(account, student);
@@ -112,7 +112,7 @@ public class FeedbackSubmissionEditPageData extends PageData {
         return isSessionOpenForSubmission || isModeration;
     }
     
-    public List<StudentFeedbackSubmissionEditQuestionsWithResponses> getQuestionsWithResponses() {
+    public List<EditQuestionsWithResponses> getQuestionsWithResponses() {
         return questionsWithResponses;
     }
 
@@ -182,7 +182,7 @@ public class FeedbackSubmissionEditPageData extends PageData {
     }
     
     private void createQuestionsWithResponses() {
-        questionsWithResponses = new ArrayList<StudentFeedbackSubmissionEditQuestionsWithResponses>();
+        questionsWithResponses = new ArrayList<EditQuestionsWithResponses>();
         int qnIndx = 1;
         
         for (FeedbackQuestionAttributes questionAttributes : bundle.getSortedQuestions()) {
@@ -194,25 +194,25 @@ public class FeedbackSubmissionEditPageData extends PageData {
             }
             
             if (numOfResponseBoxes > 0) {
-                FeedbackSubmissionEditQuestion question = createQuestion(questionAttributes, qnIndx);
-                List<FeedbackSubmissionEditResponse> responses = createResponses(questionAttributes, qnIndx, numOfResponseBoxes);
+                EditQuestion question = createQuestion(questionAttributes, qnIndx);
+                List<EditResponse> responses = createResponses(questionAttributes, qnIndx, numOfResponseBoxes);
             
-                questionsWithResponses.add(new StudentFeedbackSubmissionEditQuestionsWithResponses(
+                questionsWithResponses.add(new EditQuestionsWithResponses(
                                                 question, responses, numOfResponseBoxes, maxResponsesPossible));
                 qnIndx++;
             }
         }
     }
 
-    private FeedbackSubmissionEditQuestion createQuestion(FeedbackQuestionAttributes questionAttributes, int qnIndx) {
+    private EditQuestion createQuestion(FeedbackQuestionAttributes questionAttributes, int qnIndx) {
         boolean isModeratedQuestion = String.valueOf(questionAttributes.questionNumber).equals(getModeratedQuestion());
         
-        return new FeedbackSubmissionEditQuestion(questionAttributes, qnIndx, isModeratedQuestion);
+        return new EditQuestion(questionAttributes, qnIndx, isModeratedQuestion);
     }
 
-    private List<FeedbackSubmissionEditResponse> createResponses(
+    private List<EditResponse> createResponses(
                                     FeedbackQuestionAttributes questionAttributes, int qnIndx, int numOfResponseBoxes) {
-        List<FeedbackSubmissionEditResponse> responses = new ArrayList<FeedbackSubmissionEditResponse>();
+        List<EditResponse> responses = new ArrayList<EditResponse>();
         
         List<FeedbackResponseAttributes> existingResponses = bundle.questionResponseBundle.get(questionAttributes);
         int responseIndx = 0;
@@ -226,7 +226,7 @@ public class FeedbackSubmissionEditPageData extends PageData {
                                                                                                qnIndx, responseIndx, questionAttributes.courseId,
                                                                                                existingResponse.getResponseDetails());
             
-            responses.add(new FeedbackSubmissionEditResponse(responseIndx, true, recipientOptionsForQuestion, 
+            responses.add(new EditResponse(responseIndx, true, recipientOptionsForQuestion, 
                                                                  submissionFormHtml, existingResponse.getId()));
             responseIndx++;
         }
@@ -237,7 +237,7 @@ public class FeedbackSubmissionEditPageData extends PageData {
                                             .getQuestionWithoutExistingResponseSubmissionFormHtml(isSessionOpenForSubmission,
                                                                                                   qnIndx, responseIndx, questionAttributes.courseId);
             
-            responses.add(new FeedbackSubmissionEditResponse(responseIndx, false, recipientOptionsForQuestion, submissionFormHtml, ""));
+            responses.add(new EditResponse(responseIndx, false, recipientOptionsForQuestion, submissionFormHtml, ""));
             responseIndx++;
         }
         

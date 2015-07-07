@@ -18,9 +18,9 @@ import teammates.common.datatransfer.FeedbackSessionDetailsBundle;
 import teammates.common.util.Const;
 import teammates.common.util.TimeHelper;
 import teammates.ui.controller.StudentHomePageData;
-import teammates.ui.template.CourseTable;
-import teammates.ui.template.ElementTag;
-import teammates.ui.template.StudentFeedbackSessionActions;
+import teammates.ui.template.shared.CourseTable;
+import teammates.ui.template.shared.ElementTag;
+import teammates.ui.template.student.home.StudentFeedbackSessionActions;
 
 public class StudentHomePageDataTest {
     private List<CourseDetailsBundle> courses;

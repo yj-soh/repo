@@ -14,13 +14,13 @@ import teammates.common.exception.EntityDoesNotExistException;
 import teammates.common.util.Assumption;
 import teammates.common.util.Const;
 import teammates.common.util.TimeHelper;
-import teammates.ui.template.AdditionalSettingsFormSegment;
-import teammates.ui.template.ElementTag;
-import teammates.ui.template.InstructorFeedbackSessionActions;
-import teammates.ui.template.FeedbackSessionsTableRow;
-import teammates.ui.template.FeedbackSessionsCopyFromModal;
-import teammates.ui.template.FeedbackSessionsTable;
-import teammates.ui.template.FeedbackSessionsForm;
+import teammates.ui.template.instructor.feedbacks.CopyFromModal;
+import teammates.ui.template.instructor.feedbacks.FeedbackSessionsTable;
+import teammates.ui.template.instructor.feedbacks.FeedbackSessionsTableRow;
+import teammates.ui.template.instructor.feedbacks.FeedbackSessionActions;
+import teammates.ui.template.instructor.shared.AdditionalSettingsFormSegment;
+import teammates.ui.template.instructor.shared.FeedbackSessionsForm;
+import teammates.ui.template.shared.ElementTag;
 
 public class InstructorFeedbacksPageData extends PageData {
     
@@ -33,7 +33,7 @@ public class InstructorFeedbacksPageData extends PageData {
     
     private FeedbackSessionsTable fsList;
     private FeedbackSessionsForm newFsForm;
-    private FeedbackSessionsCopyFromModal copyFromModal;
+    private CopyFromModal copyFromModal;
     
 
     public InstructorFeedbacksPageData(AccountAttributes account) {
@@ -122,7 +122,7 @@ public class InstructorFeedbacksPageData extends PageData {
                                                                         courseIdForNewSession, courseIdToSectionNameMap);
         
         String fsName = newFeedbackSession != null ? newFeedbackSession.feedbackSessionName : "";
-        copyFromModal = new FeedbackSessionsCopyFromModal(filteredFeedbackSessionsRow, 
+        copyFromModal = new CopyFromModal(filteredFeedbackSessionsRow, 
                                                           fsName, 
                                                           getCourseIdOptions(courses, courseIdForNewSession, 
                                                                              instructors, newFeedbackSession));
@@ -296,7 +296,7 @@ public class InstructorFeedbacksPageData extends PageData {
                 ++displayedStatsCount;
             }
             
-            InstructorFeedbackSessionActions actions = getInstructorFeedbackSessionActions(session, false,
+            FeedbackSessionActions actions = getInstructorFeedbackSessionActions(session, false,
                                                                                            instructors.get(courseId),
                                                                                  courseIdSectionNamesMap.get(courseId));
             
@@ -321,7 +321,7 @@ public class InstructorFeedbacksPageData extends PageData {
         return newFsForm;
     }
     
-    public FeedbackSessionsCopyFromModal getCopyFromModal() {
+    public CopyFromModal getCopyFromModal() {
         return copyFromModal;
     }
 

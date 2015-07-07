@@ -16,8 +16,8 @@ import teammates.common.datatransfer.StudentProfileAttributes;
 import teammates.common.util.Const;
 import teammates.test.cases.BaseTestCase;
 import teammates.ui.controller.InstructorCourseStudentDetailsPageData;
-import teammates.ui.template.StudentInfoTable;
-import teammates.ui.template.StudentProfile;
+import teammates.ui.template.instructor.coursestudentdetails.InfoTable;
+import teammates.ui.template.instructor.coursestudentdetails.Profile;
 
 public class InstructorCourseStudentDetailsPageDataTest extends BaseTestCase {
     private static final String[] USERS_COMMENT_BOX_SHOWN_TO = {"student", "team", "section"};
@@ -82,7 +82,7 @@ public class InstructorCourseStudentDetailsPageDataTest extends BaseTestCase {
         }
     }
 
-    private void testStudentProfile(StudentProfile studentProfile) {
+    private void testStudentProfile(Profile studentProfile) {
         assertNotNull(studentProfile);
         
         assertNotNull(studentProfile.getPictureUrl());
@@ -96,7 +96,7 @@ public class InstructorCourseStudentDetailsPageDataTest extends BaseTestCase {
         assertEquals(inputStudentProfile.moreInfo, studentProfile.getMoreInfo());
     }
 
-    protected void testStudentInfoTable(StudentInfoTable studentInfoTable) {
+    protected void testStudentInfoTable(InfoTable studentInfoTable) {
         assertNotNull(studentInfoTable);
         
         assertEquals(inputStudent.name, studentInfoTable.getName());

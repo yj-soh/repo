@@ -22,7 +22,7 @@ import teammates.common.exception.UnauthorizedAccessException;
 import teammates.logic.api.Logic;
 import teammates.test.cases.BaseComponentTestCase;
 import teammates.ui.controller.StudentFeedbackResultsPageData;
-import teammates.ui.template.StudentFeedbackResultsQuestionWithResponses;
+import teammates.ui.template.student.feedbackresults.QuestionWithResponses;
 
 public class StudentFeedbackResultsPageDataTest extends BaseComponentTestCase {
     private static DataBundle dataBundle = getTypicalDataBundle();
@@ -68,8 +68,8 @@ public class StudentFeedbackResultsPageDataTest extends BaseComponentTestCase {
         pageData.setBundle(logic.getFeedbackSessionResultsForStudent(question1.feedbackSessionName, question1.courseId, student.email));
         pageData.init(questionsWithResponses);
         
-        StudentFeedbackResultsQuestionWithResponses questionBundle1 = pageData.getFeedbackResultsQuestionsWithResponses().get(0);
-        StudentFeedbackResultsQuestionWithResponses questionBundle2 = pageData.getFeedbackResultsQuestionsWithResponses().get(1);
+        QuestionWithResponses questionBundle1 = pageData.getFeedbackResultsQuestionsWithResponses().get(0);
+        QuestionWithResponses questionBundle2 = pageData.getFeedbackResultsQuestionsWithResponses().get(1);
         
         assertNotNull(pageData.getFeedbackResultsQuestionsWithResponses());
         assertEquals(2, pageData.getFeedbackResultsQuestionsWithResponses().size());

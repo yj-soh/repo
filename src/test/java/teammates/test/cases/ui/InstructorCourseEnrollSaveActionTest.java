@@ -19,7 +19,7 @@ import teammates.ui.controller.InstructorCourseEnrollPageData;
 import teammates.ui.controller.InstructorCourseEnrollResultPageData;
 import teammates.ui.controller.InstructorCourseEnrollSaveAction;
 import teammates.ui.controller.ShowPageResult;
-import teammates.ui.template.EnrollResultPanel;
+import teammates.ui.template.instructor.courseenroll.ResultPanel;
 
 public class InstructorCourseEnrollSaveActionTest extends BaseActionTest {
 
@@ -250,7 +250,7 @@ public class InstructorCourseEnrollSaveActionTest extends BaseActionTest {
     /**
      * Verify if <code>student exists in the <code>studentsAfterEnrollment
      */
-    private void verifyStudentEnrollmentStatus(StudentAttributes student, List<EnrollResultPanel> panelList) {
+    private void verifyStudentEnrollmentStatus(StudentAttributes student, List<ResultPanel> panelList) {
         boolean result = false;
         
         StudentAttributes.UpdateStatus status = student.updateStatus;

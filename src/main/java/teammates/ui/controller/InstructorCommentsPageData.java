@@ -13,10 +13,10 @@ import teammates.common.datatransfer.FeedbackSessionAttributes;
 import teammates.common.datatransfer.InstructorAttributes;
 import teammates.common.datatransfer.StudentAttributes;
 import teammates.common.util.TimeHelper;
-import teammates.ui.template.CommentRow;
-import teammates.ui.template.InstructorCommentsCommentRow;
-import teammates.ui.template.InstructorCommentsForStudentsTable;
-import teammates.ui.template.VisibilityCheckboxes;
+import teammates.ui.template.instructor.comments.InstructorCommentsCommentRow;
+import teammates.ui.template.instructor.comments.InstructorCommentsForStudentsTable;
+import teammates.ui.template.instructor.comments.VisibilityCheckboxes;
+import teammates.ui.template.instructor.shared.CommentRow;
 
 /**
  * PageData: the data to be used in the InstructorCommentsPage

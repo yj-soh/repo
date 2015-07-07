@@ -23,7 +23,7 @@ import teammates.common.datatransfer.StudentAttributes;
 import teammates.common.util.Const;
 import teammates.test.cases.BaseTestCase;
 import teammates.ui.controller.FeedbackSubmissionEditPageData;
-import teammates.ui.template.StudentFeedbackSubmissionEditQuestionsWithResponses;
+import teammates.ui.template.student.feedbacksubmission.EditQuestionsWithResponses;
 
 public class FeedbackSubmissionEditPageDataTest extends BaseTestCase {
     private static DataBundle dataBundle = getTypicalDataBundle();
@@ -213,7 +213,7 @@ public class FeedbackSubmissionEditPageDataTest extends BaseTestCase {
     }
     
     public void testQuestionAttributes() {
-        StudentFeedbackSubmissionEditQuestionsWithResponses questionWithResponses = pageData.getQuestionsWithResponses().get(0);
+        EditQuestionsWithResponses questionWithResponses = pageData.getQuestionsWithResponses().get(0);
         
         assertEquals(question.questionType, questionWithResponses.getQuestion().getQuestionType());
         assertEquals(question.courseId, questionWithResponses.getQuestion().getCourseId());

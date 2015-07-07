@@ -3,13 +3,13 @@ package teammates.ui.controller;
 import teammates.common.datatransfer.AccountAttributes;
 import teammates.common.datatransfer.StudentProfileAttributes;
 import teammates.common.util.Const;
-import teammates.ui.template.StudentProfileEditBox;
-import teammates.ui.template.StudentProfileUploadPhotoModal;
+import teammates.ui.template.student.profile.EditBox;
+import teammates.ui.template.student.profile.UploadPhotoModal;
 
 public class StudentProfilePageData extends PageData {
 
-    private StudentProfileEditBox profileEditBox;
-    private StudentProfileUploadPhotoModal uploadPhotoModal;
+    private EditBox profileEditBox;
+    private UploadPhotoModal uploadPhotoModal;
     
     public StudentProfilePageData(AccountAttributes account, String isEditingPhoto) {
         super(account);
@@ -22,17 +22,17 @@ public class StudentProfilePageData extends PageData {
                        + "?" + Const.ParamsNames.BLOB_KEY + "=" + profile.pictureKey
                        + "&" + Const.ParamsNames.USER_ID + "=" + account.googleId;
         }
-        this.profileEditBox = new StudentProfileEditBox(account.name, isEditingPhoto, profile,
+        this.profileEditBox = new EditBox(account.name, isEditingPhoto, profile,
                                                         account.googleId, pictureUrl);
-        this.uploadPhotoModal = new StudentProfileUploadPhotoModal(account.googleId, pictureUrl, profile.pictureKey);
+        this.uploadPhotoModal = new UploadPhotoModal(account.googleId, pictureUrl, profile.pictureKey);
 
     }
     
-    public StudentProfileEditBox getProfileEditBox() {
+    public EditBox getProfileEditBox() {
         return profileEditBox;
     }
 
-    public StudentProfileUploadPhotoModal getUploadPhotoModal() {
+    public UploadPhotoModal getUploadPhotoModal() {
         return uploadPhotoModal;
     }
 

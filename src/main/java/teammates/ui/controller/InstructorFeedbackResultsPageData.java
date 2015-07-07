@@ -9,7 +9,7 @@ import teammates.common.datatransfer.InstructorAttributes;
 import teammates.common.util.Const;
 import teammates.common.util.StringHelper;
 import teammates.common.util.TimeHelper;
-import teammates.ui.template.FeedbackSessionPublishButton;
+import teammates.ui.template.student.feedbackresults.FeedbackSessionPublishButton;
 
 public class InstructorFeedbackResultsPageData extends PageData {
     public static final String EXCEEDING_RESPONSES_ERROR_MESSAGE = "Sorry, we could not retrieve results. "

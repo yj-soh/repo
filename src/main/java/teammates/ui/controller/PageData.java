@@ -26,8 +26,8 @@ import teammates.common.util.StringHelper;
 import teammates.common.util.TimeHelper;
 import teammates.common.util.Url;
 import teammates.logic.api.Logic;
-import teammates.ui.template.ElementTag;
-import teammates.ui.template.InstructorFeedbackSessionActions;
+import teammates.ui.template.instructor.feedbacks.FeedbackSessionActions;
+import teammates.ui.template.shared.ElementTag;
 
 /**
  * Data and utility methods needed to render a specific page.
@@ -693,11 +693,11 @@ public class PageData {
      * @return
      * @throws EntityDoesNotExistException 
      */
-    public InstructorFeedbackSessionActions getInstructorFeedbackSessionActions(FeedbackSessionAttributes session,
+    public FeedbackSessionActions getInstructorFeedbackSessionActions(FeedbackSessionAttributes session,
                                                                                 boolean isHome,
                                                                                 InstructorAttributes instructor,
                                                                                 List<String> sectionsInCourse) {
-        return new InstructorFeedbackSessionActions(this, session, isHome, instructor, sectionsInCourse);
+        return new FeedbackSessionActions(this, session, isHome, instructor, sectionsInCourse);
     }
 
     /**

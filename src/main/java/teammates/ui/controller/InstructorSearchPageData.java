@@ -17,16 +17,16 @@ import teammates.common.util.Const;
 import teammates.common.util.Sanitizer;
 import teammates.common.util.TimeHelper;
 import teammates.common.util.Url;
-import teammates.ui.template.CommentRow;
-import teammates.ui.template.ElementTag;
-import teammates.ui.template.FeedbackResponseComment;
-import teammates.ui.template.FeedbackSessionRow;
-import teammates.ui.template.QuestionTable;
-import teammates.ui.template.ResponseRow;
-import teammates.ui.template.CommentsForStudentsTable;
-import teammates.ui.template.SearchStudentsTable;
-import teammates.ui.template.SearchCommentsForResponsesTable;
-import teammates.ui.template.StudentRow;
+import teammates.ui.template.instructor.search.CommentsForStudentsTable;
+import teammates.ui.template.instructor.search.FeedbackSessionRow;
+import teammates.ui.template.instructor.search.QuestionTable;
+import teammates.ui.template.instructor.search.ResponseRow;
+import teammates.ui.template.instructor.search.CommentsForResponsesTable;
+import teammates.ui.template.instructor.search.StudentsTable;
+import teammates.ui.template.instructor.search.StudentRow;
+import teammates.ui.template.instructor.shared.CommentRow;
+import teammates.ui.template.shared.ElementTag;
+import teammates.ui.template.shared.FeedbackResponseComment;
 
 /**
  * PageData: the data to be used in the InstructorSearchPage
@@ -46,8 +46,8 @@ public class InstructorSearchPageData extends PageData {
     
     /* Tables containing search results */
     private List<CommentsForStudentsTable> searchCommentsForStudentsTables;
-    private List<SearchCommentsForResponsesTable> searchCommentsForResponsesTables;
-    private List<SearchStudentsTable> searchStudentsTables;
+    private List<CommentsForResponsesTable> searchCommentsForResponsesTables;
+    private List<StudentsTable> searchStudentsTables;
     
     public InstructorSearchPageData(AccountAttributes account) {
         super(account);
@@ -109,11 +109,11 @@ public class InstructorSearchPageData extends PageData {
         return searchCommentsForStudentsTables;
     }
     
-    public List<SearchCommentsForResponsesTable> getSearchCommentsForResponsesTables() {
+    public List<CommentsForResponsesTable> getSearchCommentsForResponsesTables() {
         return searchCommentsForResponsesTables;
     }
     
-    public List<SearchStudentsTable> getSearchStudentsTables() {
+    public List<StudentsTable> getSearchStudentsTables() {
         return searchStudentsTables;
     }
 
@@ -169,19 +169,19 @@ public class InstructorSearchPageData extends PageData {
     private void setSearchCommentsForResponsesTables(
                                     FeedbackResponseCommentSearchResultBundle frcSearchResultBundle) {
         
-        searchCommentsForResponsesTables = new ArrayList<SearchCommentsForResponsesTable>();
-        searchCommentsForResponsesTables.add(new SearchCommentsForResponsesTable(
+        searchCommentsForResponsesTables = new ArrayList<CommentsForResponsesTable>();
+        searchCommentsForResponsesTables.add(new CommentsForResponsesTable(
                                                createFeedbackSessionRows(frcSearchResultBundle)));
     }
     
     private void setSearchStudentsTables(StudentSearchResultBundle studentSearchResultBundle) {
         
-        searchStudentsTables = new ArrayList<SearchStudentsTable>(); // 1 table for each course      
+        searchStudentsTables = new ArrayList<StudentsTable>(); // 1 table for each course      
         List<String> courseIdList = getCourseIdsFromStudentSearchResultBundle(
                                         studentSearchResultBundle.studentList, studentSearchResultBundle);
         
         for (String courseId : courseIdList) {
-            searchStudentsTables.add(new SearchStudentsTable(
+            searchStudentsTables.add(new StudentsTable(
                                        courseId, createStudentRows(courseId, studentSearchResultBundle)));
         }
     }  

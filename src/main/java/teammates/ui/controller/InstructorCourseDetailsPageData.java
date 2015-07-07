@@ -9,9 +9,9 @@ import teammates.common.datatransfer.InstructorAttributes;
 import teammates.common.datatransfer.StudentAttributes;
 import teammates.common.util.Const;
 import teammates.common.util.Url;
-import teammates.ui.template.CourseDetailsStudentsTable;
-import teammates.ui.template.CourseDetailsStudentsTableRow;
-import teammates.ui.template.ElementTag;
+import teammates.ui.template.instructor.coursedetails.StudentsTable;
+import teammates.ui.template.instructor.coursedetails.StudentsTableRow;
+import teammates.ui.template.shared.ElementTag;
 
 /**
  * PageData: data used for the "Course Details" page
@@ -23,7 +23,7 @@ public class InstructorCourseDetailsPageData extends PageData {
     private String studentListHtmlTableAsString;
     private ElementTag giveCommentButton;
     private ElementTag courseRemindButton;
-    private CourseDetailsStudentsTable studentsTable;
+    private StudentsTable studentsTable;
     
     public InstructorCourseDetailsPageData(AccountAttributes account) {
         super(account);
@@ -49,21 +49,21 @@ public class InstructorCourseDetailsPageData extends PageData {
         courseRemindButton = createButton(null, "btn btn-primary", "button_remind", null, 
                                           Const.Tooltips.COURSE_REMIND, "tooltip", onClick, isDisabled);
         
-        studentsTable = new CourseDetailsStudentsTable();
+        studentsTable = new StudentsTable();
         int studentIndex = 0;
         
-        List<CourseDetailsStudentsTableRow> studentTableRows = new ArrayList<CourseDetailsStudentsTableRow>();
+        List<StudentsTableRow> studentTableRows = new ArrayList<StudentsTableRow>();
         
         for (StudentAttributes student : students) {
-            CourseDetailsStudentsTableRow row = createStudentsTableRow(studentIndex, student);
+            StudentsTableRow row = createStudentsTableRow(studentIndex, student);
             studentTableRows.add(row);
             studentIndex++;
         }
         studentsTable.setRows(studentTableRows);
     }
     
-    public CourseDetailsStudentsTableRow createStudentsTableRow(int studentIndex, StudentAttributes student) {
-        CourseDetailsStudentsTableRow row = new CourseDetailsStudentsTableRow(student);
+    public StudentsTableRow createStudentsTableRow(int studentIndex, StudentAttributes student) {
+        StudentsTableRow row = new StudentsTableRow(student);
         row.setActions(createActionButtons(student));
         row.setCommentActionButtons(createCommentActionButtons(student));
         row.setCommentRecipientOptions(createCommentRecipientOptions(studentIndex, student));
@@ -169,7 +169,7 @@ public class InstructorCourseDetailsPageData extends PageData {
         return instructors;
     }
     
-    public CourseDetailsStudentsTable getStudentsTable() {
+    public StudentsTable getStudentsTable() {
         return studentsTable;
     }
     

@@ -9,7 +9,7 @@ import teammates.common.datatransfer.StudentAttributes;
 import teammates.common.datatransfer.StudentAttributes.UpdateStatus;
 import teammates.common.util.Const;
 import teammates.common.util.Utils;
-import teammates.ui.template.EnrollResultPanel;
+import teammates.ui.template.instructor.courseenroll.ResultPanel;
 
 /**
  * PageData: page data for the 'Result' page after enrollment for a course
@@ -21,7 +21,7 @@ public class InstructorCourseEnrollResultPageData extends PageData {
     private List<StudentAttributes>[] students;
     private boolean hasSection;
     private String enrollStudents;
-    private List<EnrollResultPanel> enrollResultPanelList;
+    private List<ResultPanel> enrollResultPanelList;
     
     public InstructorCourseEnrollResultPageData(AccountAttributes account, String courseId, 
                                                 List<StudentAttributes>[] students, boolean hasSection, 
@@ -31,7 +31,7 @@ public class InstructorCourseEnrollResultPageData extends PageData {
         this.students = students;
         this.hasSection = hasSection;
         this.enrollStudents = enrollStudents;
-        enrollResultPanelList = new ArrayList<EnrollResultPanel>();
+        enrollResultPanelList = new ArrayList<ResultPanel>();
         
         for (int i = 0; i < UpdateStatus.STATUS_COUNT; i++) {
             String panelClass = "";
@@ -61,7 +61,7 @@ public class InstructorCourseEnrollResultPageData extends PageData {
             }
             
             String messageForEnrollmentStatus = getMessageForEnrollmentStatus(i);
-            EnrollResultPanel enrollResultPanel = new EnrollResultPanel(panelClass, messageForEnrollmentStatus, students[i]);
+            ResultPanel enrollResultPanel = new ResultPanel(panelClass, messageForEnrollmentStatus, students[i]);
             enrollResultPanelList.add(enrollResultPanel);
         }
     }
@@ -78,7 +78,7 @@ public class InstructorCourseEnrollResultPageData extends PageData {
         return enrollStudents;
     }
     
-    public List<EnrollResultPanel> getEnrollResultPanelList() {
+    public List<ResultPanel> getEnrollResultPanelList() {
         return enrollResultPanelList;
     }
     

@@ -14,10 +14,10 @@ import teammates.common.datatransfer.CourseAttributes;
 import teammates.common.util.Sanitizer;
 import teammates.ui.controller.InstructorStudentListPageData;
 import teammates.ui.datatransfer.InstructorStudentListPageCourseData;
-import teammates.ui.template.InstructorStudentListFilterBox;
-import teammates.ui.template.InstructorStudentListFilterCourse;
-import teammates.ui.template.InstructorStudentListSearchBox;
-import teammates.ui.template.InstructorStudentListStudentsTableCourse;
+import teammates.ui.template.instructor.studentlist.FilterBox;
+import teammates.ui.template.instructor.studentlist.FilterCourse;
+import teammates.ui.template.instructor.studentlist.SearchBox;
+import teammates.ui.template.instructor.studentlist.StudentsTableCourse;
 
 public class InstructorStudentListPageDataTest {
 
@@ -74,24 +74,24 @@ public class InstructorStudentListPageDataTest {
         return new InstructorStudentListPageData(acct, searchKey, displayArchive, numStudents, coursesToDisplay);
     }
     
-    private void testSearchBox(InstructorStudentListSearchBox searchBox) {
+    private void testSearchBox(SearchBox searchBox) {
         assertEquals(acct.googleId, searchBox.getGoogleId());
         assertEquals(Sanitizer.sanitizeForHtml(searchKey), searchBox.getSearchKey());
         assertEquals(islpd.getInstructorSearchLink(), searchBox.getInstructorSearchLink());
     }
 
-    private void testFilterBox(InstructorStudentListFilterBox filterBox) {
+    private void testFilterBox(FilterBox filterBox) {
         assertEquals(displayArchive, filterBox.isDisplayArchive());
 
         // sample data has only one course
-        InstructorStudentListFilterCourse course = filterBox.getCourses().get(0);
+        FilterCourse course = filterBox.getCourses().get(0);
         assertEquals(sampleCourse.id, course.getCourseId());
         assertEquals(sampleCourse.name, course.getCourseName());
     }
 
-    private void testStudentsTable(List<InstructorStudentListStudentsTableCourse> studentsTable) {
+    private void testStudentsTable(List<StudentsTableCourse> studentsTable) {
         // sample data has only one course
-        InstructorStudentListStudentsTableCourse course = studentsTable.get(0);
+        StudentsTableCourse course = studentsTable.get(0);
         assertEquals(sampleCourse.id, course.getCourseId());
         assertEquals(sampleCourse.name, course.getCourseName());
         assertEquals(acct.googleId, course.getGoogleId());

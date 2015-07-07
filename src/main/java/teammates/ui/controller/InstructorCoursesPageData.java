@@ -10,11 +10,11 @@ import teammates.common.datatransfer.CourseAttributes;
 import teammates.common.datatransfer.CourseDetailsBundle;
 import teammates.common.util.Const;
 import teammates.common.util.Sanitizer;
-import teammates.ui.template.ActiveCoursesTable;
-import teammates.ui.template.ActiveCoursesTableRow;
-import teammates.ui.template.ArchivedCoursesTable;
-import teammates.ui.template.ArchivedCoursesTableRow;
-import teammates.ui.template.ElementTag;
+import teammates.ui.template.instructor.courses.ActiveCoursesTable;
+import teammates.ui.template.instructor.courses.ActiveCoursesTableRow;
+import teammates.ui.template.instructor.courses.ArchivedCoursesTable;
+import teammates.ui.template.instructor.courses.ArchivedCoursesTableRow;
+import teammates.ui.template.shared.ElementTag;
 
 /**
  * This is the PageData object for the 'Courses' page 

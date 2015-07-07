@@ -16,8 +16,8 @@ import teammates.common.util.Assumption;
 import teammates.common.util.Const;
 import teammates.common.util.TimeHelper;
 import teammates.common.util.Url;
-import teammates.ui.template.CourseTable;
-import teammates.ui.template.ElementTag;
+import teammates.ui.template.shared.CourseTable;
+import teammates.ui.template.shared.ElementTag;
 
 public class InstructorHomePageData extends PageData {
 

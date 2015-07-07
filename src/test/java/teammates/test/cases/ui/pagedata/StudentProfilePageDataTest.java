@@ -9,8 +9,8 @@ import teammates.common.datatransfer.StudentProfileAttributes;
 import teammates.common.util.Const;
 import teammates.common.util.StringHelper;
 import teammates.ui.controller.StudentProfilePageData;
-import teammates.ui.template.StudentProfileEditBox;
-import teammates.ui.template.StudentProfileUploadPhotoModal;
+import teammates.ui.template.student.profile.EditBox;
+import teammates.ui.template.student.profile.UploadPhotoModal;
 
 public class StudentProfilePageDataTest {
     
@@ -57,7 +57,7 @@ public class StudentProfilePageDataTest {
         return new StudentProfilePageData(acct, isEditingPhoto);        
     }
     
-    private void testProfileEditBox(StudentProfileEditBox profileEditBox) {
+    private void testProfileEditBox(EditBox profileEditBox) {
         assertEquals(acct.name, profileEditBox.getName());
         assertEquals(isEditingPhoto, profileEditBox.getEditingPhoto());
         assertEquals(StringHelper.convertToEmptyStringIfNull(spa.shortName), profileEditBox.getShortName());
@@ -78,7 +78,7 @@ public class StudentProfilePageDataTest {
         assertEquals(pictureUrl, profileEditBox.getPictureUrl());
     }
 
-    private void testUploadPhotoModal(StudentProfileUploadPhotoModal uploadPhotoModal) {
+    private void testUploadPhotoModal(UploadPhotoModal uploadPhotoModal) {
         assertEquals(acct.googleId, uploadPhotoModal.getGoogleId());
         assertEquals(pictureUrl, uploadPhotoModal.getPictureUrl());
         assertEquals(spa.pictureKey, uploadPhotoModal.getPictureKey());
