@@ -363,8 +363,13 @@ public class FeedbackConstantSumQuestionDetails extends FeedbackQuestionDetails 
         List<String> options = constSumOptions;
         
         Map<String, List<Integer>> optionPoints = generateOptionPointsMapping(responses);
+        
+        boolean isQuestionVisible = true;
         if (distributeToRecipients) {
-            updateOptionPointsMappingWithDefaultValue(optionPoints, question, responses, bundle);
+            isQuestionVisible = isQuestionVisible(responses, bundle);
+            if (isQuestionVisible) {
+                updateOptionPointsMappingWithDefaultValue(optionPoints, question, responses, bundle);
+            }
         }
 
         DecimalFormat df = new DecimalFormat("#.##");
@@ -377,8 +382,12 @@ public class FeedbackConstantSumQuestionDetails extends FeedbackQuestionDetails 
             
             if (distributeToRecipients) {
                 String participantIdentifier = entry.getKey();
-                String name = bundle.getFullNameFromRoster(participantIdentifier);
-                String teamName = bundle.getTeamNameFromRoster(participantIdentifier);
+                String name = isQuestionVisible
+                              ? bundle.getFullNameFromRoster(participantIdentifier)
+                              : bundle.getNameForEmail(participantIdentifier);
+                String teamName = isQuestionVisible
+                                  ? bundle.getTeamNameFromRoster(participantIdentifier)
+                                  : bundle.getTeamNameForEmail(participantIdentifier);
                 
                 fragments += FeedbackQuestionFormTemplates.populateTemplate(FeedbackQuestionFormTemplates.CONSTSUM_RESULT_STATS_RECIPIENTFRAGMENT,
                         "${constSumOptionValue}",  Sanitizer.sanitizeForHtml(name),
@@ -410,7 +419,6 @@ public class FeedbackConstantSumQuestionDetails extends FeedbackQuestionDetails 
         return html;
     }
     
-    
     @Override
     public String getQuestionResultStatisticsCsv(
             List<FeedbackResponseAttributes> responses,
@@ -424,8 +432,13 @@ public class FeedbackConstantSumQuestionDetails extends FeedbackQuestionDetails 
         String fragments = "";
         List<String> options = constSumOptions;
         Map<String, List<Integer>> optionPoints = generateOptionPointsMapping(responses);
+        
+        boolean isQuestionVisible = true;
         if (distributeToRecipients) {
-            updateOptionPointsMappingWithDefaultValue(optionPoints, question, responses, bundle);
+            isQuestionVisible = isQuestionVisible(responses, bundle);
+            if (isQuestionVisible) {
+                updateOptionPointsMappingWithDefaultValue(optionPoints, question, responses, bundle);
+            }
         }
 
         DecimalFormat df = new DecimalFormat("#.##");
@@ -433,8 +446,12 @@ public class FeedbackConstantSumQuestionDetails extends FeedbackQuestionDetails 
         for(Entry<String, List<Integer>> entry : optionPoints.entrySet() ){
             String option;
             if(distributeToRecipients){
-                String teamName = bundle.getTeamNameFromRoster(entry.getKey());
-                String recipientName = bundle.getFullNameFromRoster(entry.getKey());
+                String teamName = isQuestionVisible
+                                  ? bundle.getTeamNameFromRoster(entry.getKey())
+                                  : bundle.getTeamNameForEmail(entry.getKey());
+                String recipientName = isQuestionVisible
+                                       ? bundle.getFullNameFromRoster(entry.getKey())
+                                       : bundle.getNameForEmail(entry.getKey());
                 option = Sanitizer.sanitizeForCsv(teamName) + "," + Sanitizer.sanitizeForCsv(recipientName);
             } else {
                 option = Sanitizer.sanitizeForCsv(options.get(Integer.parseInt(entry.getKey())));
@@ -452,7 +469,25 @@ public class FeedbackConstantSumQuestionDetails extends FeedbackQuestionDetails 
         
         return csv;
     }
-
+    
+    /**
+     * Checks if a question is visible to the instructor.
+     * (i.e. if the giver or recipients are anonymous for the instructor)
+     * @param responses responses to the question
+     * @param bundle
+     * @return true if a question is visible to the instructor, false otherwise
+     */
+    private boolean isQuestionVisible(List<FeedbackResponseAttributes> responses,
+                                      FeedbackSessionResultsBundle bundle) {
+        if (!responses.isEmpty()) {
+            FeedbackResponseAttributes firstResponse = responses.get(0);
+            boolean a = bundle.isGiverVisible(firstResponse);
+            boolean b = bundle.isRecipientVisible(firstResponse);
+            return a && b;
+        }
+        return true;
+    }
+    
     /**
      * From the feedback responses, generate a mapping of the option to a list of points received for that option.
      * The key of the map returned is the option name / recipient's participant identifier.
